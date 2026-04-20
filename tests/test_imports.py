@@ -26,7 +26,6 @@ def test_config_schema():
     assert isinstance(schema, dict)
     assert schema["type"] == "object"
     for key in (
-        "sensor_name",
         "variant",
         "modbus_config",
         "slave_id",

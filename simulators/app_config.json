@@ -1,5 +1,4 @@
 {
-    "sensor_name": "Sim Wind Sensor",
     "variant": "combined",
     "modbus_config": {
         "bus_type": "serial",

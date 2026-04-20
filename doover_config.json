@@ -7,10 +7,12 @@
         "allow_many": true,
         "description": "Reads wind speed and direction from an IQFlow IQWS sensor over Modbus RTU.",
         "long_description": "README.md",
-        "depends_on": [],
+        "depends_on": [
+            "modbus_interface"
+        ],
         "owner_org_key": "",
         "icon_url": "https://iqflow.io/cdn/shop/files/IQFLOW1_250x.png?v=1768631147",
-        "image_name": "ghcr.io/getdoover/iqflow_wind_sensor",
+        "image_name": "ghcr.io/getdoover/iqflow-wind-sensor:main",
         "container_registry_profile_id": 93955828574386692,
         "build_args": "--platform linux/amd64,linux/arm64",
         "config_schema": {
@@ -19,19 +21,6 @@
             "title": "$default",
             "type": "object",
             "properties": {
-                "sensor_name": {
-                    "title": "Sensor Name",
-                    "x-name": "sensor_name",
-                    "x-hidden": false,
-                    "type": [
-                        "string",
-                        "null"
-                    ],
-                    "x-required": false,
-                    "description": "Display name for this sensor instance.",
-                    "default": "Wind Sensor",
-                    "x-position": 0
-                },
                 "variant": {
                     "enum": [
                         "combined",
@@ -47,7 +36,7 @@
                     "x-required": false,
                     "description": "combined = IQWS-D / SD-A (wind speed + direction). speed_only = IQWS-S (wind speed only).",
                     "default": "combined",
-                    "x-position": 1
+                    "x-position": 0
                 },
                 "modbus_config": {
                     "title": "Modbus Config",
@@ -55,7 +44,7 @@
                     "x-hidden": false,
                     "type": "object",
                     "x-required": true,
-                    "x-position": 2,
+                    "x-position": 1,
                     "properties": {
                         "bus_type": {
                             "enum": [
@@ -221,7 +210,7 @@
                     "x-required": false,
                     "description": "Modbus unit / slave ID of the IQWS sensor (1..247).",
                     "default": 1,
-                    "x-position": 3
+                    "x-position": 2
                 },
                 "poll_interval_seconds": {
                     "title": "Poll Interval (seconds)",
@@ -234,7 +223,7 @@
                     "x-required": false,
                     "description": "How often to read the sensor.",
                     "default": 3,
-                    "x-position": 4
+                    "x-position": 3
                 },
                 "display_unit": {
                     "enum": [
@@ -252,7 +241,7 @@
                     "x-required": false,
                     "description": "Unit used for wind speed and gust tags/UI.",
                     "default": "kmh",
-                    "x-position": 5
+                    "x-position": 4
                 },
                 "gust_window_seconds": {
                     "title": "Gust Window (seconds)",
@@ -265,7 +254,7 @@
                     "x-required": false,
                     "description": "Rolling-window size used to compute the gust (peak) wind speed.",
                     "default": 180,
-                    "x-position": 6
+                    "x-position": 5
                 },
                 "no_comms_timeout_seconds": {
                     "title": "No-Comms Timeout (seconds)",
@@ -278,7 +267,7 @@
                     "x-required": false,
                     "description": "Clear comms_ok after this many seconds without a successful read.",
                     "default": 30,
-                    "x-position": 7
+                    "x-position": 6
                 },
                 "sim_app_key": {
                     "title": "Simulator App Key",
@@ -292,7 +281,7 @@
                     "x-required": false,
                     "description": "Optional. If set, read wind data from this simulator app's tags instead of the Modbus bus. Leave blank for normal operation.",
                     "default": "",
-                    "x-position": 8
+                    "x-position": 7
                 }
             },
             "additionalElements": true,

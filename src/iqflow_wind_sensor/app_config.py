@@ -5,13 +5,6 @@ from pydoover.docker.modbus import ModbusConfig
 
 
 class IQFlowWindSensorConfig(config.Schema):
-    sensor_name = config.String(
-        "Sensor Name",
-        name="sensor_name",
-        default="Wind Sensor",
-        description="Display name for this sensor instance.",
-    )
-
     variant = config.Enum(
         "Sensor Variant",
         name="variant",

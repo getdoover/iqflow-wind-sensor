@@ -18,8 +18,10 @@ class IQFlowWindSensorTags(Tags):
 
     # ---- technician command tags (no UI; tag-only per design) -----------
     # Set one of these to a non-null value to trigger a Modbus write.
-    # The app clears the tag after executing and populates last_cmd_result.
-    cmd_set_slave_id = Tag("integer")
-    cmd_set_baud = Tag("integer")
-    cmd_set_parity = Tag("string")
+    # The app clears the tag back to None after executing and populates
+    # last_cmd_result. Default=None so `is not None` reliably filters out
+    # unset tags (a Tag with no default reads as the NotSet sentinel).
+    cmd_set_slave_id = Tag("integer", default=None)
+    cmd_set_baud = Tag("integer", default=None)
+    cmd_set_parity = Tag("string", default=None)
     last_cmd_result = Tag("string", default="")

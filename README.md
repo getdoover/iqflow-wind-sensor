@@ -35,7 +35,6 @@ Fields are declared in [`src/iqflow_wind_sensor/app_config.py`](src/iqflow_wind_
 
 | Setting | Description | Default |
 |---|---|---|
-| **Sensor Name** | Display name shown in the UI. | `Wind Sensor` |
 | **Sensor Variant** | `combined` (IQWS-D / SD-A) or `speed_only` (IQWS-S). | `combined` |
 | **Modbus Bus** | Nested `ModbusConfig` — bus type, serial port, baud, parity, etc. Defaults match IQWS factory settings. | serial / 9600 8N1 |
 | **Slave ID** | Modbus unit ID of the sensor (1–247). | `1` |
