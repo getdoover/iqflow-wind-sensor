@@ -25,7 +25,7 @@ from .iqws_driver import (
 
 log = logging.getLogger(__name__)
 
-MODBUS_HOLDING_REGISTER = 3
+MODBUS_HOLDING_REGISTER = 4  # holding_register
 
 SIM_TAG_SPEED_RAW = "sim_wind_speed_raw"
 SIM_TAG_DIRECTION_RAW = "sim_wind_direction_raw"

@@ -110,7 +110,7 @@ def test_unit_label():
 
 @pytest.mark.parametrize(
     "baud,expected",
-    [(2400, 24), (9600, 96), (19200, 192), (38400, 384), (57600, 576), (115200, 1152)],
+    [(2400, 0x24), (9600, 0x96), (19200, 0x192), (38400, 0x384), (57600, 0x576), (115200, 0x1152)],
 )
 def test_encode_baud_supported(baud, expected):
     assert encode_baud(baud) == expected

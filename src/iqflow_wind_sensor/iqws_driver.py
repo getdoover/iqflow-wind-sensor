@@ -2,7 +2,7 @@
 
 Register map (holding registers, FC 0x03 read / 0x06 write):
     0x0000  slave id         uint16
-    0x0001  baud             uint16 (baud // 100, e.g. 9600 -> 0x0060, 19200 -> 0x00C0)
+    0x0001  baud             uint16, BCD-packed baud // 100 (e.g. 9600 -> 0x0096, 19200 -> 0x0192)
     0x0002  parity           uint16 (0=none, 1=odd, 2=even)
     0x0004  wind speed       uint16, value / 100 -> m/s     [0 .. 50 m/s]
     0x0005  wind direction   uint16, 16-point compass index [0 .. 15]
@@ -145,10 +145,14 @@ _PARITY_CHOICES = {"none": 0, "odd": 1, "even": 2}
 
 
 def encode_baud(baud: int) -> int:
-    """Encode a baud rate into the IQWS baud register (baud // 100)."""
+    """Encode a baud rate into the IQWS baud register.
+
+    The sensor stores baud // 100 as BCD — each decimal digit occupies one
+    nibble. e.g. 9600 → 0x0096 (= 150 dec), 19200 → 0x0192 (= 402 dec).
+    """
     if baud not in _BAUD_CHOICES:
         raise ValueError(f"Unsupported baud {baud!r}; expected one of {_BAUD_CHOICES}")
-    return baud // 100
+    return int(str(baud // 100), 16)
 
 
 def encode_parity(parity: str) -> int:
