@@ -1,8 +1,7 @@
-"""Smoke tests for the template application.
+"""Smoke tests for the iqflow_wind_sensor app.
 
-These validate that modules are importable, the config schema is well-formed,
-the Tags/UI classes subclass the correct bases, and the config export entry
-point runs end-to-end.
+Validates imports, schema well-formedness, Tags/UI subclassing, and that
+the config/UI export entry points run end-to-end.
 """
 
 import json
@@ -13,59 +12,60 @@ from pydoover.ui import UI
 
 
 def test_import_app():
-    from app_template.application import SampleApplication
-    assert SampleApplication.config_cls is not None
-    assert SampleApplication.tags_cls is not None
-    assert SampleApplication.ui_cls is not None
+    from iqflow_wind_sensor.application import IQFlowWindSensorApplication
+    assert IQFlowWindSensorApplication.config_cls is not None
+    assert IQFlowWindSensorApplication.tags_cls is not None
+    assert IQFlowWindSensorApplication.ui_cls is not None
 
 
 def test_config_schema():
-    from app_template.app_config import SampleConfig
-    assert issubclass(SampleConfig, Schema)
+    from iqflow_wind_sensor.app_config import IQFlowWindSensorConfig
+    assert issubclass(IQFlowWindSensorConfig, Schema)
 
-    schema = SampleConfig.to_schema()
+    schema = IQFlowWindSensorConfig.to_schema()
     assert isinstance(schema, dict)
     assert schema["type"] == "object"
-    assert len(schema["properties"]) > 0
-    assert "a_funny_message" in schema["required"]
-    assert "simulator_app_key" in schema["required"]
+    for key in (
+        "sensor_name",
+        "variant",
+        "modbus_config",
+        "slave_id",
+        "poll_interval_seconds",
+        "display_unit",
+        "gust_window_seconds",
+        "no_comms_timeout_seconds",
+    ):
+        assert key in schema["properties"], f"{key} missing from config schema"
 
 
 def test_tags():
-    from app_template.app_tags import SampleTags
-    assert issubclass(SampleTags, Tags)
+    from iqflow_wind_sensor.app_tags import IQFlowWindSensorTags
+    assert issubclass(IQFlowWindSensorTags, Tags)
 
 
 def test_ui():
-    from app_template.app_ui import SampleUI
-    assert issubclass(SampleUI, UI)
-
-
-def test_state_machine():
-    from app_template.app_state import SampleState
-    state = SampleState()
-    assert state.state == "off"
+    from iqflow_wind_sensor.app_ui import IQFlowWindSensorUI
+    assert issubclass(IQFlowWindSensorUI, UI)
 
 
 def test_config_export(tmp_path):
-    from app_template.app_config import SampleConfig
+    from iqflow_wind_sensor.app_config import IQFlowWindSensorConfig
 
     fp = tmp_path / "doover_config.json"
-    SampleConfig.export(fp, "sample_application")
+    IQFlowWindSensorConfig.export(fp, "iqflow_wind_sensor")
 
     data = json.loads(fp.read_text())
-    assert "sample_application" in data
-    assert "config_schema" in data["sample_application"]
-    assert "properties" in data["sample_application"]["config_schema"]
+    assert "iqflow_wind_sensor" in data
+    assert "config_schema" in data["iqflow_wind_sensor"]
 
 
 def test_ui_export(tmp_path):
-    from app_template.app_ui import SampleUI
+    from iqflow_wind_sensor.app_ui import IQFlowWindSensorUI
 
     fp = tmp_path / "doover_config.json"
-    SampleUI(None, None, None).export(fp, "sample_application")
+    IQFlowWindSensorUI(None, None, None).export(fp, "iqflow_wind_sensor")
 
     data = json.loads(fp.read_text())
-    assert "ui_schema" in data["sample_application"]
-    assert data["sample_application"]["ui_schema"]["type"] == "uiApplication"
-    assert "is_working" in data["sample_application"]["ui_schema"]["children"]
+    assert "ui_schema" in data["iqflow_wind_sensor"]
+    assert data["iqflow_wind_sensor"]["ui_schema"]["type"] == "uiApplication"
+    assert "wind_speed" in data["iqflow_wind_sensor"]["ui_schema"]["children"]
