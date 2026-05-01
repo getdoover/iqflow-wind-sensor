@@ -24,10 +24,10 @@ class IQFlowWindSensorConfig(config.Schema):
         description="Modbus unit / slave ID of the IQWS sensor (1..247).",
     )
 
-    poll_interval_seconds = config.Integer(
+    poll_interval_seconds = config.Number(
         "Poll Interval (seconds)",
         name="poll_interval_seconds",
-        default=3,
+        default=1,
         description="How often to read the sensor.",
     )
 

@@ -39,16 +39,14 @@ class IQFlowWindSensorApplication(Application):
     config: IQFlowWindSensorConfig
     tags: IQFlowWindSensorTags
 
-    # The main loop fires every second; we throttle the actual Modbus poll
-    # to `config.poll_interval_seconds` ourselves so that gust bookkeeping
-    # and command-tag handling stay responsive between polls.
-    loop_target_period = 1
-
     async def setup(self):
         self._gust = RollingMax(self.config.gust_window_seconds.value)
         self._last_poll_ts: float = 0.0
         self._last_successful_read_ts: float = 0.0
         self._last_gust_window = self.config.gust_window_seconds.value
+
+        self.loop_target_period = min(0.5, self.config.poll_interval_seconds.value)
+        self.tag_manager.observed_max_age = self.config.poll_interval_seconds.value
 
     async def main_loop(self):
         now = time.time()
