@@ -217,12 +217,12 @@
                     "x-name": "poll_interval_seconds",
                     "x-hidden": false,
                     "type": [
-                        "integer",
+                        "number",
                         "null"
                     ],
                     "x-required": false,
                     "description": "How often to read the sensor.",
-                    "default": 3,
+                    "default": 1.0,
                     "x-position": 3
                 },
                 "display_unit": {

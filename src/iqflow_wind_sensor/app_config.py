@@ -27,7 +27,7 @@ class IQFlowWindSensorConfig(config.Schema):
     poll_interval_seconds = config.Number(
         "Poll Interval (seconds)",
         name="poll_interval_seconds",
-        default=1,
+        default=1.0,
         description="How often to read the sensor.",
     )
 
