@@ -1,16 +1,16 @@
-from pydoover.tags import Tag, Tags
+from pydoover.tags import Tag, Tags, Number, Boolean
 
 
 class IQFlowWindSensorTags(Tags):
     # ---- live readings (display unit; see config.display_unit) ----------
-    wind_speed = Tag("number", default=0)
-    wind_gust = Tag("number", default=0)
-    wind_direction_degrees = Tag("number", default=0)
+    wind_speed = Number(default=0, log_on_cross=1.0)
+    wind_gust = Number(default=0)
+    wind_direction_degrees = Number(default=0)
     wind_direction_compass = Tag("string", default="")
 
     # ---- comms / diagnostics --------------------------------------------
-    comms_ok = Tag("boolean", default=False)
-    last_read_time = Tag("number", default=0)
+    comms_ok = Boolean(default=False, log_on_change=True)
+    last_read_time = Number(default=0)
 
     # Raw register values (diagnostics / audit).
     raw_speed_value = Tag("integer", default=0)
