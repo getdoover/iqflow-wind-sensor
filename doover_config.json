@@ -313,7 +313,8 @@
                             "dataType": "number",
                             "lookup": "$tag.app().wind_speed:number:0",
                             "active": true,
-                            "colour": "blue"
+                            "colour": "blue",
+                            "units": "km/h"
                         },
                         "windGust": {
                             "name": "windGust",
@@ -321,16 +322,18 @@
                             "dataType": "number",
                             "lookup": "$tag.app().wind_gust:number:0",
                             "active": true,
-                            "colour": "tomato"
+                            "colour": "tomato",
+                            "units": "km/h"
                         },
                         "windDirection": {
                             "name": "windDirection",
-                            "displayString": "Wind Direction (\u00b0)",
+                            "displayString": "Wind Direction",
                             "dataType": "number",
                             "lookup": "$tag.app().wind_direction_degrees:number:0",
                             "active": false,
                             "colour": "purple",
-                            "sharedAxis": false
+                            "sharedAxis": false,
+                            "units": "\u00b0"
                         }
                     },
                     "title": "Wind History"
@@ -342,6 +345,7 @@
                     "showActivity": true,
                     "position": 52,
                     "hidden": false,
+                    "units": "km/h",
                     "varType": "float",
                     "currentValue": "$tag.app().wind_speed:number:0",
                     "decPrecision": 1,
@@ -383,6 +387,7 @@
                     "showActivity": true,
                     "position": 53,
                     "hidden": false,
+                    "units": "km/h",
                     "varType": "float",
                     "currentValue": "$tag.app().wind_gust:number:0",
                     "decPrecision": 1,
@@ -416,17 +421,6 @@
                             "label": "Gale+"
                         }
                     ]
-                },
-                "wind_direction_": {
-                    "name": "wind_direction_",
-                    "type": "uiVariable",
-                    "displayString": "Wind Direction (\u00b0)",
-                    "showActivity": true,
-                    "position": 54,
-                    "hidden": false,
-                    "varType": "float",
-                    "currentValue": "$tag.app().wind_direction_degrees:number:0",
-                    "decPrecision": 0
                 },
                 "wind_direction": {
                     "name": "wind_direction",

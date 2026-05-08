@@ -3,6 +3,7 @@ from pathlib import Path
 from pydoover import ui
 
 from .app_tags import IQFlowWindSensorTags
+from .iqws_driver import WindUnit, unit_label
 
 
 # Beaufort-inspired bands, sized for km/h (the default wind_units config).
@@ -33,6 +34,7 @@ class IQFlowWindSensorUI(ui.UI):
                 name="windSpeed",
                 data_type="number",
                 colour=ui.Colour.blue,
+                units="km/h",
                 active=True,
             ),
             ui.Series(
@@ -41,14 +43,16 @@ class IQFlowWindSensorUI(ui.UI):
                 name="windGust",
                 data_type="number",
                 colour=ui.Colour.tomato,
+                units="km/h",
                 active=True,
             ),
             ui.Series(
-                "Wind Direction (°)",
+                "Wind Direction",
                 value=IQFlowWindSensorTags.wind_direction_degrees,
                 name="windDirection",
                 data_type="number",
                 colour=ui.Colour.purple,
+                units="°",
                 shared_axis=False,
                 active=False,
             ),
@@ -59,18 +63,21 @@ class IQFlowWindSensorUI(ui.UI):
         "Wind Speed",
         value=IQFlowWindSensorTags.wind_speed,
         precision=1,
+        units="km/h",
         ranges=_WIND_SPEED_RANGES,
     )
     wind_gust = ui.NumericVariable(
         "Wind Gust",
         value=IQFlowWindSensorTags.wind_gust,
         precision=1,
+        units="km/h",
         ranges=_WIND_GUST_RANGES,
     )
     wind_direction_degrees = ui.NumericVariable(
-        "Wind Direction (°)",
+        "Wind Direction",
         value=IQFlowWindSensorTags.wind_direction_degrees,
         precision=0,
+        units="°",
     )
     wind_direction_compass = ui.TextVariable(
         "Wind Direction",
@@ -80,6 +87,13 @@ class IQFlowWindSensorUI(ui.UI):
         "Sensor Communicating",
         value=IQFlowWindSensorTags.comms_ok,
     )
+
+    async def setup(self):
+        speed_units = unit_label(WindUnit(self.config.display_unit.value))
+        self.wind_speed.units = speed_units
+        self.wind_gust.units = speed_units
+        self.history.series[0].units = speed_units
+        self.history.series[1].units = speed_units
 
 
 def export():

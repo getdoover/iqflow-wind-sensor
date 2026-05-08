@@ -2,9 +2,9 @@ from pydoover.tags import Tags, Number, Boolean, String, Delta, AnyChange
 
 
 class IQFlowWindSensorTags(Tags):
-    wind_speed = Number(default=0, log_on=Delta(percent=10))
-    wind_gust = Number(default=0, log_on=Delta(percent=10))
-    wind_direction_degrees = Number(default=0, log_on=Delta(amount=22.5))
+    wind_speed = Number(default=0, log_on=Delta(amount=20))
+    wind_gust = Number(default=0, log_on=Delta(amount=20))
+    wind_direction_degrees = Number(default=0, log_on=Delta(amount=90))
     wind_direction_compass = String(default="", log_on=AnyChange())
 
     # ---- comms / diagnostics --------------------------------------------
