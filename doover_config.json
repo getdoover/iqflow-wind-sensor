@@ -328,7 +328,7 @@
                             "displayString": "Wind Direction (\u00b0)",
                             "dataType": "number",
                             "lookup": "$tag.app().wind_direction_degrees:number:0",
-                            "active": true,
+                            "active": false,
                             "colour": "purple",
                             "sharedAxis": false
                         }

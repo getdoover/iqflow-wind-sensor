@@ -50,7 +50,7 @@ class IQFlowWindSensorUI(ui.UI):
                 data_type="number",
                 colour=ui.Colour.purple,
                 shared_axis=False,
-                active=True,
+                active=False,
             ),
         ],
     )
