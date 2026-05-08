@@ -295,59 +295,155 @@
             "position": "$config.app().dv_app_position:number:100",
             "icon": null,
             "colour": null,
-            "defaultOpen": false,
+            "defaultOpen": "$config.app().dv_app_default_open:boolean",
             "type": "uiApplication",
             "name": "$config.app().APP_KEY",
             "children": {
+                "windHistory": {
+                    "name": "windHistory",
+                    "type": "uiMultiPlot",
+                    "displayString": "Wind History",
+                    "showActivity": true,
+                    "position": 51,
+                    "hidden": false,
+                    "series": {
+                        "windSpeed": {
+                            "name": "windSpeed",
+                            "displayString": "Wind Speed",
+                            "dataType": "number",
+                            "lookup": "$tag.app().wind_speed:number:0",
+                            "active": true,
+                            "colour": "blue"
+                        },
+                        "windGust": {
+                            "name": "windGust",
+                            "displayString": "Wind Gust",
+                            "dataType": "number",
+                            "lookup": "$tag.app().wind_gust:number:0",
+                            "active": true,
+                            "colour": "tomato"
+                        },
+                        "windDirection": {
+                            "name": "windDirection",
+                            "displayString": "Wind Direction (\u00b0)",
+                            "dataType": "number",
+                            "lookup": "$tag.app().wind_direction_degrees:number:0",
+                            "active": true,
+                            "colour": "purple",
+                            "sharedAxis": false
+                        }
+                    },
+                    "title": "Wind History"
+                },
                 "wind_speed": {
                     "name": "wind_speed",
                     "type": "uiVariable",
                     "displayString": "Wind Speed",
                     "showActivity": true,
-                    "position": 1,
+                    "position": 52,
                     "hidden": false,
                     "varType": "float",
                     "currentValue": "$tag.app().wind_speed:number:0",
-                    "decPrecision": 1
+                    "decPrecision": 1,
+                    "ranges": [
+                        {
+                            "min": 0,
+                            "max": 20,
+                            "colour": "green",
+                            "show_on_graph": true,
+                            "label": "Calm"
+                        },
+                        {
+                            "min": 20,
+                            "max": 40,
+                            "colour": "blue",
+                            "show_on_graph": true,
+                            "label": "Moderate"
+                        },
+                        {
+                            "min": 40,
+                            "max": 62,
+                            "colour": "yellow",
+                            "show_on_graph": true,
+                            "label": "Strong"
+                        },
+                        {
+                            "min": 62,
+                            "max": 150,
+                            "colour": "red",
+                            "show_on_graph": true,
+                            "label": "Gale+"
+                        }
+                    ]
                 },
                 "wind_gust": {
                     "name": "wind_gust",
                     "type": "uiVariable",
                     "displayString": "Wind Gust",
                     "showActivity": true,
-                    "position": 2,
+                    "position": 53,
                     "hidden": false,
                     "varType": "float",
                     "currentValue": "$tag.app().wind_gust:number:0",
-                    "decPrecision": 1
+                    "decPrecision": 1,
+                    "ranges": [
+                        {
+                            "min": 0,
+                            "max": 25,
+                            "colour": "green",
+                            "show_on_graph": true,
+                            "label": "Calm"
+                        },
+                        {
+                            "min": 25,
+                            "max": 50,
+                            "colour": "blue",
+                            "show_on_graph": true,
+                            "label": "Moderate"
+                        },
+                        {
+                            "min": 50,
+                            "max": 75,
+                            "colour": "yellow",
+                            "show_on_graph": true,
+                            "label": "Strong"
+                        },
+                        {
+                            "min": 75,
+                            "max": 180,
+                            "colour": "red",
+                            "show_on_graph": true,
+                            "label": "Gale+"
+                        }
+                    ]
                 },
-                "wind_direction_degrees": {
-                    "name": "wind_direction_degrees",
+                "wind_direction_": {
+                    "name": "wind_direction_",
                     "type": "uiVariable",
                     "displayString": "Wind Direction (\u00b0)",
                     "showActivity": true,
-                    "position": 3,
+                    "position": 54,
                     "hidden": false,
                     "varType": "float",
                     "currentValue": "$tag.app().wind_direction_degrees:number:0",
                     "decPrecision": 0
                 },
-                "wind_direction_compass": {
-                    "name": "wind_direction_compass",
+                "wind_direction": {
+                    "name": "wind_direction",
                     "type": "uiVariable",
                     "displayString": "Wind Direction",
                     "showActivity": true,
-                    "position": 4,
+                    "position": 55,
                     "hidden": false,
                     "varType": "string",
                     "currentValue": "$tag.app().wind_direction_compass:string:\"\""
                 },
-                "comms_ok": {
-                    "name": "comms_ok",
+                "sensor_communicating": {
+                    "name": "sensor_communicating",
                     "type": "uiVariable",
                     "displayString": "Sensor Communicating",
                     "showActivity": true,
-                    "position": 5,
+                    "position": 56,
                     "hidden": false,
                     "varType": "bool",
                     "currentValue": "$tag.app().comms_ok:boolean:false"
