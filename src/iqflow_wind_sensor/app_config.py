@@ -3,6 +3,8 @@ from pathlib import Path
 from pydoover import config
 from pydoover.docker.modbus import ModbusConfig
 
+from iqflow_wind_sensor.iqws_driver import WindUnit
+
 
 class IQFlowWindSensorConfig(config.Schema):
     variant = config.Enum(
@@ -34,8 +36,8 @@ class IQFlowWindSensorConfig(config.Schema):
     display_unit = config.Enum(
         "Wind Speed Unit",
         name="display_unit",
-        choices=["kmh", "mps", "knots"],
-        default="kmh",
+        choices=WindUnit,
+        default=WindUnit.KMH,
         description="Unit used for wind speed and gust tags/UI.",
     )
 

@@ -227,9 +227,9 @@
                 },
                 "display_unit": {
                     "enum": [
-                        "kmh",
-                        "mps",
-                        "knots"
+                        "m/s",
+                        "km/h",
+                        "kt"
                     ],
                     "title": "Wind Speed Unit",
                     "x-name": "display_unit",
@@ -240,7 +240,7 @@
                     ],
                     "x-required": false,
                     "description": "Unit used for wind speed and gust tags/UI.",
-                    "default": "kmh",
+                    "default": "km/h",
                     "x-position": 4
                 },
                 "gust_window_seconds": {
