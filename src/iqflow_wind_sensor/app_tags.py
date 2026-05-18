@@ -5,7 +5,7 @@ class IQFlowWindSensorTags(Tags):
     wind_speed = Number(default=0, log_on=Delta(amount=20), live=True)
     wind_gust = Number(default=0, log_on=Delta(amount=20), live=True)
     wind_direction_degrees = Number(default=0, log_on=Delta(amount=90), live=True)
-    wind_direction_compass = String(default="", log_on=AnyChange(), live=True)
+    wind_direction_compass = String(default="", live=True)
 
     # ---- comms / diagnostics --------------------------------------------
     comms_ok = Boolean(default=False, log_on=AnyChange())
