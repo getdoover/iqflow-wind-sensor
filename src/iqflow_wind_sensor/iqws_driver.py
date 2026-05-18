@@ -113,9 +113,9 @@ _MPS_TO_KNOTS = 1.9438444924406046
 
 
 class WindUnit(str, enum.Enum):
-    MPS = "mps"
-    KMH = "kmh"
-    KNOTS = "knots"
+    MPS = "m/s"
+    KMH = "km/h"
+    KNOTS = "kt"
 
 
 def convert_speed(speed_mps: float | None, unit: WindUnit) -> float | None:
@@ -128,14 +128,6 @@ def convert_speed(speed_mps: float | None, unit: WindUnit) -> float | None:
     if unit is WindUnit.KNOTS:
         return speed_mps * _MPS_TO_KNOTS
     raise ValueError(f"Unknown wind unit: {unit}")
-
-
-def unit_label(unit: WindUnit) -> str:
-    return {
-        WindUnit.MPS: "m/s",
-        WindUnit.KMH: "km/h",
-        WindUnit.KNOTS: "kt",
-    }[unit]
 
 
 # ---- commissioning encoders (for technician write tags) -----------------

@@ -314,7 +314,8 @@
                             "lookup": "$tag.app().wind_speed:number:0",
                             "active": true,
                             "colour": "blue",
-                            "units": "km/h"
+                            "units": "$config.app().display_unit",
+                            "live": true
                         },
                         "windGust": {
                             "name": "windGust",
@@ -323,7 +324,8 @@
                             "lookup": "$tag.app().wind_gust:number:0",
                             "active": true,
                             "colour": "tomato",
-                            "units": "km/h"
+                            "units": "$config.app().display_unit",
+                            "live": true
                         },
                         "windDirection": {
                             "name": "windDirection",
@@ -333,7 +335,8 @@
                             "active": false,
                             "colour": "purple",
                             "sharedAxis": false,
-                            "units": "\u00b0"
+                            "units": "\u00b0",
+                            "live": true
                         }
                     },
                     "title": "Wind History"
@@ -345,7 +348,7 @@
                     "showActivity": true,
                     "position": 52,
                     "hidden": false,
-                    "units": "km/h",
+                    "units": "$config.app().display_unit",
                     "varType": "float",
                     "currentValue": "$tag.app().wind_speed:number:0",
                     "decPrecision": 1,
@@ -378,7 +381,8 @@
                             "show_on_graph": true,
                             "label": "Gale+"
                         }
-                    ]
+                    ],
+                    "live": true
                 },
                 "wind_gust": {
                     "name": "wind_gust",
@@ -387,7 +391,7 @@
                     "showActivity": true,
                     "position": 53,
                     "hidden": false,
-                    "units": "km/h",
+                    "units": "$config.app().display_unit",
                     "varType": "float",
                     "currentValue": "$tag.app().wind_gust:number:0",
                     "decPrecision": 1,
@@ -420,7 +424,8 @@
                             "show_on_graph": true,
                             "label": "Gale+"
                         }
-                    ]
+                    ],
+                    "live": true
                 },
                 "wind_direction": {
                     "name": "wind_direction",
@@ -430,7 +435,8 @@
                     "position": 55,
                     "hidden": false,
                     "varType": "string",
-                    "currentValue": "$tag.app().wind_direction_compass:string:\"\""
+                    "currentValue": "$tag.app().wind_direction_compass:string:\"\"",
+                    "live": true
                 },
                 "sensor_communicating": {
                     "name": "sensor_communicating",

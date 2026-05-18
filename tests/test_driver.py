@@ -14,7 +14,6 @@ from iqflow_wind_sensor.iqws_driver import (
     encode_baud,
     encode_parity,
     num_registers_for,
-    unit_label,
     validate_slave_id,
 )
 
@@ -98,12 +97,6 @@ def test_convert_speed_knots():
 
 def test_convert_speed_none_passthrough():
     assert convert_speed(None, WindUnit.KMH) is None
-
-
-def test_unit_label():
-    assert unit_label(WindUnit.MPS) == "m/s"
-    assert unit_label(WindUnit.KMH) == "km/h"
-    assert unit_label(WindUnit.KNOTS) == "kt"
 
 
 # ---- commissioning encoders -------------------------------------------
