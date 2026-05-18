@@ -46,7 +46,6 @@ class IQFlowWindSensorApplication(Application):
         self._last_gust_window = self.config.gust_window_seconds.value
 
         self.loop_target_period = min(0.5, self.config.poll_interval_seconds.value)
-        self.tag_manager.observed_max_age = self.config.poll_interval_seconds.value
 
     async def main_loop(self):
         now = time.time()
